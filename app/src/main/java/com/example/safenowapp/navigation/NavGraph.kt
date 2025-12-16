@@ -1,21 +1,27 @@
 package com.example.safenowapp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.safenowapp.ui.HomeScreen
 
-@Composable
-fun AppNavGraph() {
-    val navController = rememberNavController()
+object Routes {
+    const val HOME = "home"
+}
 
+@Composable
+fun AppNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = Routes.HOME
     ) {
-        composable("home") {
-            HomeScreen()
+        composable(Routes.HOME) {
+            HomeScreen(
+                onSosClick = {
+                    // SOS click handle
+                }
+            )
         }
     }
 }
