@@ -2,4 +2,4 @@ package com.example.safenowapp.ui.theme
 
 import androidx.compose.material3.Typography
 
-val AppTypography = Typography()
+val Typography = Typography()

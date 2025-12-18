@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -16,53 +17,33 @@ android {
         versionName = "1.0"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     buildFeatures {
         compose = true
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
+        kotlinCompilerExtensionVersion = "1.5.15"
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
+val room_version = "2.6.1"
+
 dependencies {
 
-    // Core libraries
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
-    implementation("androidx.activity:activity-compose:1.9.1")
+    // Compose (direct versions, no BOM)
+    implementation("androidx.compose.ui:ui:1.7.5")
+    implementation("androidx.compose.material3:material3:1.3.1")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.7.5")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.7.5")
 
-    // Compose BOM
-    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
-
-    // UI + Material
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation(libs.androidx.compose.ui.graphics)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation("androidx.compose.ui:ui-tooling")
-
-    // Navigation
     implementation("androidx.navigation:navigation-compose:2.8.0")
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // Room
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
 }
