@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "SafeNowApp"
 include(":app")
+include(":app")
+include(":app")
+include(":app")
