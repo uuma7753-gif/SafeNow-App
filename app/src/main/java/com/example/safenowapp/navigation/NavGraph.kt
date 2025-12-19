@@ -12,15 +12,12 @@ import com.example.safenowapp.ui.screens.EmergencyActiveScreen
 import com.example.safenowapp.ui.screens.PermissionGateScreen
 import com.example.safenowapp.ui.screens.SettingsScreen
 
-
 const val SPLASH = "splash"
 const val PERMISSIONS = "permissions"
 const val SOS = "sos"
 const val CONTACTS = "contacts"
 const val EMERGENCY_ACTIVE = "emergency_active"
-
 const val SETTINGS = "settings"
-
 
 @Composable
 fun AppNavGraph(
@@ -55,7 +52,7 @@ fun AppNavGraph(
                 onContactsClick = { navController.navigate(CONTACTS) },
                 onTrackMeClick = { /* TODO later */ },
                 onHistoryClick = { /* TODO later */ },
-                onSettingsClick = { /* TODO later */ },
+                onSettingsClick = { navController.navigate(SETTINGS) },
                 onSosClick = { navController.navigate(EMERGENCY_ACTIVE) }
             )
         }
@@ -71,6 +68,11 @@ fun AppNavGraph(
                 onCancelClick = { navController.popBackStack() }
             )
         }
+
+        composable(SETTINGS) {
+            SettingsScreen(
+                onBackClick = { navController.popBackStack() }
+            )
+        }
     }
 }
-
